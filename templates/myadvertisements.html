@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Advertisements</title>
+    <script>
+        function validate() {
+            var title = document.forms["advertisementform"]["title"].value
+            var desc = document.forms["advertisementform"]["desc"].value
+
+            if (title == "") {
+                document.getElementById("advertisement_error").innerText = "Title must be entered."
+                document.getElementById("advertisement_error").style.display = "block";
+                return false;
+            }
+            if (desc == "") {
+                document.getElementById("advertisement_error").innerText = "Description must be entered."
+                document.getElementById("advertisement_error").style.display = "block";
+                return false;
+            }
+
+            document.getElementById("advertisement_error").innerText = "";
+            document.getElementById("advertisement_error").style.display = "none";
+            return true;
+        }
+    </script>
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        input, select {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #666;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #advertisement_error {
+            display: none;
+            color: red;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            color: #fff;
+        }
+
+        table, th, td {
+            border: 1px solid #666;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #444;
+        }
+
+        tr:nth-child(even) {
+            background-color: #555;
+        }
+
+        tr:hover {
+            background-color: #666;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add a new advertisement</h1>
+    <a href="/applylogin">Go back</a>
+    <form name="advertisementform" onsubmit="return validate()" method="POST" action="/addAdvertisement">
+        <p>Title <input type="text" name="title"></p>
+        <p>Description <input type="text" name="desc"></p>
+        <p>Category:
+            <select id="category" name="category">
+                {% for category in category_list  %}
+                    <option value="{{ category[0] }}">{{ category[0] }}</option>
+                {% endfor %}</select>
+        </p>
+        <input type="submit" value="Add">
+        <p id="advertisement_error" style="display: none"></p>
+    </form>
+
+    <h1>Your Advertisements</h1>
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Activate/Deactivate</th>
+        </tr>
+
+        {% for ad in advertisement_list %}
+            <tr>
+                <td>{{ ad[1] }}</td>
+                <td>{{ ad[2] }}</td>
+                <td>{{ ad[3] }}</td>
+                {% if ad[4] %}
+                    <td><a href="/deactivate?aid={{ ad[0] }}">Deactivate</a></td>
+                {% else %}
+                    <td><a href="/activate?aid={{ ad[0] }}">Activate</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

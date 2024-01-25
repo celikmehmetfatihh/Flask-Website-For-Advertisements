@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script>
+    function displayMenu() {
+        document.getElementById("login_form").style.display = "none";
+        document.getElementById("home_heading").style.display = "none";
+        document.getElementById("click_register").style.display = "none";
+        document.getElementById("ad_heading").style.display = "none";
+        document.getElementById("keyword_inp").style.display = "none";
+        document.getElementById("ctg").style.display = "none";
+        document.getElementById("srchbutton").style.display = "none";
+    }
+</script>
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h2, p {
+            margin: 10px 0;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input, select {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #666;
+            border-radius: 5px;
+        }
+
+        input[type="submit"],
+        a {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="home_heading">Welcome to Home Page!</h1>
+    <form id="login_form" method="POST" action="/applylogin">
+        <p>Username <input type="text" name="username"></p>
+        <p>Password <input type="password" name="pwd"></p>
+        <input type="submit" value="Login">
+    </form>
+    <br/>
+    {% if error %}
+        {{ error }}
+    {% endif %}
+    <p id="click_register">Click <a href="/register">here</a> to register</p>
+    <br/>
+    <form method="POST" action="/searchadvertisement">
+        <h2 id="ad_heading">Search Active Advertisements</h2>
+        <input id="keyword_inp" type="text" name="keywords" placeholder="Enter keywords">
+        <select id="ctg" name="category">
+            <option value="all">All Categories</option>
+                {% for category in category_list  %}
+                    <option value="{{ category[0] }}">{{ category[0] }}</option>
+                {% endfor %}
+        </select>
+        <input id="srchbutton" type="submit" value="Search">
+    </form>
+        {% if showMenu %}
+        <script>
+            displayMenu();
+        </script>
+        <p><a href="/home">Home Page</a> | <a href="/myadvertisements">My Advertisements</a> | <a href="/myprofile">My Profile</a> | <a href="/logout">Logout</a></p>
+        {% endif %}
+</body>
+</html>

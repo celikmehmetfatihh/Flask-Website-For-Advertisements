@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>See Advertisement</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #666;
+            border-radius: 5px;
+            background-color: #555;
+            color: #fff;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="{{ advertisement[0] }}">
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" value="{{ advertisement[1] }}">
+
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" value="{{ advertisement[2] }}">
+
+        <label for="fullname">Contact Full Name:</label>
+        <input type="text" id="fullname" name="fullname" value="{{ advertisement[3] }}">
+
+        <label for="email">Contact Email:</label>
+        <input type="email" id="email" name="email" value="{{ advertisement[4] }}">
+
+        <label for="telno">Contact Telno:</label>
+        <input type="tel" id="telno" name="telno" value="{{ advertisement[5] }}">
+    </form>
+</body>
+</html>

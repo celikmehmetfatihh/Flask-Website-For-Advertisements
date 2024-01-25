@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #666;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #hidden-paragraph {
+            display: none;
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function validate() {
+            var username = document.forms["registrationform"]["username"].value;
+            var pwd = document.forms["registrationform"]["pwd"].value;
+            var fullname = document.forms["registrationform"]["fullname"].value;
+            var email = document.forms["registrationform"]["email"].value;
+            var telno = document.forms["registrationform"]["telno"].value;
+
+            if (username == "" || pwd == "" || fullname == "" || email == "" || telno == "") {
+                document.getElementById("hidden-paragraph").innerText = "All fields must be entered.";
+                document.getElementById("hidden-paragraph").style.display = "block";
+                return false;
+            }
+
+            document.getElementById("hidden-paragraph").innerText = "";
+            document.getElementById("hidden-paragraph").style.display = "none";
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Registration Page</h1>
+    <form name="registrationform" onsubmit="return validate()" method="POST" action="/applyregister">
+        <p>Username <input type="text" name="username"></p>
+        <p>Password <input type="password" name="pwd"></p>
+        <p>Fullname <input type="text" name="fullname"></p>
+        <p>Email <input type="email" name="email"></p>
+        <p>Telephone Number <input type="tel" name="telno"></p>
+        <input type="submit" value="Register">
+    </form>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <p id="hidden-paragraph">All fields must be entered.</p>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Advertisement</title>
+        <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        table, th, td {
+            border: 1px solid #666;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #444;
+        }
+
+        tr:nth-child(even) {
+            background-color: #555;
+        }
+
+        tr:hover {
+            background-color: #666;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Advertisement</h1>
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Contact Fullname</th>
+            <th></th>
+        </tr>
+        {% if searchList %}
+            <p> {{cname}}: </p>
+        {% endif %}
+        {% for row in searchList %}
+            <tr>
+                <td> {{ row[0] }} </td>
+                <td> {{ row[1] }} </td>
+                <td> {{ row[2] }} </td>
+                <td><a href="/seeadvertisement?aid={{ row[3] }}">See More</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
